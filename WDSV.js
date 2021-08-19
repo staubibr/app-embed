@@ -54,7 +54,8 @@ export default class Main extends Evented {
 			var files = {
 				visualization : `${Core.URLs.models}/visualization.json`,
 				structure : `${Core.URLs.models}/structure.json`,
-				messages : `${Core.URLs.models}/messages.log`
+				messages : `${Core.URLs.models}/messages.log`,
+				style : `${Core.URLs.models}/style.json`
 			}
 			
 			if (this.diagram) files.diagram = `${Core.URLs.models}/diagram.svg`;
@@ -69,8 +70,9 @@ export default class Main extends Evented {
 		var p1 = Net.File(files.visualization, "visualization.json", true);
 		var p2 = Net.File(files.structure, "structure.json");
 		var p3 = Net.File(files.messages, "messages.log");
+		var p4 = Net.File(files.style, "style.json", true);
 		
-		var defs = [p1,p2,p3];
+		var defs = [p1,p2,p3,p4];
 		
 		if (files.diagram) defs.push(Net.File(files.diagram, "diagram.svg", true));
 		
@@ -78,6 +80,8 @@ export default class Main extends Evented {
 	}
 	
 	OnFiles_Ready(files) {
+		files = files.filter(f => !!f);
+		
 		this.files = { 
 			structure: files.find(f => f.name == 'structure.json'),
 			messages: files.find(f => f.name == 'messages.log'),

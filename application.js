@@ -41,6 +41,8 @@ export default Core.Templatable("Application", class Application extends Templat
 	ShowView(container) {
 		var d = Core.Defer();
 		
+		Dom.AddCss(document.body, this.simulation.type);
+		
 		if (this.simulation.type == "DEVS") {
 			d.Resolve(new DiagramAuto(container, this.simulation, this.settings.diagram));
 		}
