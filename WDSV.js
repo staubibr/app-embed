@@ -97,7 +97,7 @@ export default class Main extends Evented {
 		this.loader.roots.forEach(r => this.node.removeChild(r));
 		this.loader.container.style.display = "block"
 
-		var app = new Application(this.node, ev.simulation, ev.configuration, ev.style, this.files);
+		var app = new Application(this.node, ev.simulation, ev.configuration, ev.style, ev.files);
 
 		this.Emit("Ready", { application:app });
 	}
