@@ -32,23 +32,13 @@ export default class Main extends Evented {
 		this.Emit("Initializing");
 	}
 	
-	OnBaseConfig_Loaded(responses) {
-		// Core.URLs.conversion = "http://localhost:8080/parser/auto";
-		// Core.URLs.models = "http://localhost/Dev/arslab-logs/devs-logs/";
-		// Core.URLs.files = "http://arslab-services.herokuapp.com/get/model/simulation";
-	
+	OnBaseConfig_Loaded(responses) {	
 		this.loader = new Loader(this.node);
 		
 		this.loader.On("ready", this.OnLoader_Ready.bind(this));
 		this.loader.On("error", this.OnLoader_Failure.bind(this));
-		
-		if (this.id != null) {
-			var files = [Core.URLs.files, this.id].join("/");
-			
-			Net.JSON(files + "?v=0").then(files => this.LoadFiles(files));
-		}
-		
-		else if (this.path) {
+	
+		if (this.path) {
 			Core.URLs.models = [Core.URLs.models, this.path].join("/");
 			
 			var files = {
