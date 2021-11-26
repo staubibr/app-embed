@@ -1,10 +1,10 @@
 'use strict';
 
-import Core from "../api-web-devs/tools/core.js";
-import Net from "../api-web-devs/tools/net.js";
-import Evented from '../api-web-devs/components/evented.js';
-import Loader from '../api-web-devs/widgets/loader.js';
-import ChunkReader from '../api-web-devs/components/chunkReader.js';
+import Core from "../app-framework/tools/core.js";
+import Net from "../app-framework/tools/net.js";
+import Evented from '../app-framework/components/evented.js';
+import Loader from '../app-framework/widgets/loader.js';
+import ChunkReader from '../app-framework/components/chunkReader.js';
 import Application from "./application.js";
 
 export default class Main extends Evented { 

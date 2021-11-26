@@ -1,5 +1,5 @@
 import WDSV from './WDSV.js';
-import Net from '../api-web-devs/tools/net.js';
+import Net from '../app-framework/tools/net.js';
 
 var params = { 
 	id : Net.GetUrlParameter("id"),

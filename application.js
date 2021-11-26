@@ -1,15 +1,15 @@
 
 'use strict';
 
-import Core from '../api-web-devs/tools/core.js';
-import Dom from '../api-web-devs/tools/dom.js';
-import Templated from '../api-web-devs/components/templated.js';
-import Configuration from '../api-web-devs/components/configuration/configuration.js';
-import DiagramAuto from '../api-web-devs/widgets/diagram/auto.js'
-import GridAuto from '../api-web-devs/widgets/grid/auto.js'
-import GisAuto from '../api-web-devs/widgets/gis/auto.js'
-import Playback from '../api-web-devs/widgets/playback.js';
-import Recorder from '../api-web-devs/components/recorder.js';
+import Core from '../app-framework/tools/core.js';
+import Dom from '../app-framework/tools/dom.js';
+import Templated from '../app-framework/components/templated.js';
+import Configuration from '../app-framework/components/configuration/configuration.js';
+import DiagramAuto from '../app-framework/widgets/diagram/auto.js'
+import GridAuto from '../app-framework/widgets/grid/auto.js'
+import GisAuto from '../app-framework/widgets/gis/auto.js'
+import Playback from '../app-framework/widgets/playback.js';
+import Recorder from '../app-framework/components/recorder.js';
 
 export default Core.Templatable("Application", class Application extends Templated { 
 
