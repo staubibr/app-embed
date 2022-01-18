@@ -4,6 +4,7 @@ import Net from '../app-framework/tools/net.js';
 var params = { 
 	id : Net.GetUrlParameter("id"),
 	path: Net.GetUrlParameter("path"),
+	uuid: Net.GetUrlParameter("uuid"),
 	diagram: Net.GetUrlParameter("diagram") == "true"
 }
 

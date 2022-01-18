@@ -41,17 +41,16 @@ export default Core.Templatable("Application", class Application extends Templat
 		
 		Dom.AddCss(document.body, this.simulation.type);
 		
-		if (this.simulation.type == "DEVS") {
+		if (this.settings.diagram) {
 			d.Resolve(new DiagramAuto(container, this.simulation, this.settings.diagram));
 		}
-		else if (this.simulation.type === "Cell-DEVS") {
+		else if (this.settings.grid) {
 			d.Resolve(new GridAuto(container, this.simulation, this.settings.grid));
 		}
-		else if (this.simulation.type === "GIS-DEVS") {
-			// var geojson = this.files.convert.filter(f => f.name.match(/.geojson/i));
+		else if (this.settings.gis) {
 			var view = new GisAuto(container, this.simulation, this.settings.gis, this.files.geojson || []);
 
-			Dom.Place(this.Elem("playback"), view.widget.roots[0]);
+			// Dom.Place(this.Elem("playback"), view.widget.roots[0]);
 			
 			view.On("ready", ev => d.Resolve(view));
 		}

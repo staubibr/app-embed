@@ -11,6 +11,8 @@ export default class Main extends Evented {
 
 	get path() { return this._json.path; }
 
+	get uuid() { return this._json.uuid; }
+
 	get id() { return this._json.id; }
 
 	get diagram() { return this._json.diagram; }
@@ -22,11 +24,7 @@ export default class Main extends Evented {
 		
 		this._node = node;
 		this._json = json;
-		/*
-		if (this.path == null && this.id == null) {
-			throw new Error("The embedded Web DEVS Simulation Viewer requires either an 'id' to read visualization data from the Web DEVS Environment or, a 'path' to read directly from the server.");
-		}
-		*/
+
 		Core.WaitForDocument().then(this.OnBaseConfig_Loaded.bind(this), this.OnWDSV_Failure.bind(this));
 	
 		this.Emit("Initializing");
@@ -38,9 +36,13 @@ export default class Main extends Evented {
 		this.loader.On("ready", this.OnLoader_Ready.bind(this));
 		this.loader.On("error", this.OnLoader_Failure.bind(this));
 	
-		if (this.path) {
-			Core.URLs.models = [Core.URLs.models, this.path].join("/");
-			
+		Core.URLs.models = null;
+	
+		if (this.path) Core.URLs.models = [Core.URLs.logs, this.path].join("/");
+		
+		if (this.uuid) Core.URLs.models = [Core.URLs.viz, this.uuid].join("/");
+	
+		if (Core.URLs.models) {			
 			var files = {
 				visualization : `${Core.URLs.models}/visualization.json`,
 				structure : `${Core.URLs.models}/structure.json`,

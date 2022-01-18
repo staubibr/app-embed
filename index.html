@@ -37,9 +37,8 @@
 			import Net from '../app-framework/tools/net.js';
 
 			var params = { 
-				id : Net.GetUrlParameter("id"),
 				path: Net.GetUrlParameter("path"),
-				diagram: Net.GetUrlParameter("diagram") == "true"
+				uuid: Net.GetUrlParameter("uuid")
 			}
 
 			var viewer = new WDSV(document.body, params);

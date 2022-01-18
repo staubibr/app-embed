@@ -48,6 +48,7 @@ body.Embed button:hover {
     transform: translate(-50%,0);
     padding: 2px;
 	border-radius: 0px;
+    bottom: 10px;
 }
 
 body.Embed.GIS-DEVS .playback {
