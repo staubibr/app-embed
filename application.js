@@ -49,8 +49,6 @@ export default Core.Templatable("Application", class Application extends Templat
 		}
 		else if (this.settings.gis) {
 			var view = new GisAuto(container, this.simulation, this.settings.gis, this.files.geojson || []);
-
-			// Dom.Place(this.Elem("playback"), view.widget.roots[0]);
 			
 			view.On("ready", ev => d.Resolve(view));
 		}

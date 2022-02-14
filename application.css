@@ -20,7 +20,6 @@ body.Embed .map {
 	height: 100%;    
 	padding: 0;
     margin: 0;
-	text-align: center;
 }
 
 body.Embed,
@@ -205,6 +204,10 @@ body.Embed.GIS-DEVS .playback {
 
 .ol-viewport, .ol-control button {
 	cursor: pointer;
+}
+
+.ol-popup-content {
+    width: 200px;
 }
 
 .ol-popup .ol-popup-content ul {
