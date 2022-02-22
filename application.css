@@ -47,6 +47,9 @@ body.Embed button:hover {
     transform: translate(-50%,0);
     padding: 2px;
 	border-radius: 0px;
+}
+
+.gis .playback {
     bottom: 10px;
 }
 
@@ -173,6 +176,9 @@ body.Embed.GIS-DEVS .playback {
 
 .view {
     display: inline-block;
+    transform: translate(-50%, 0px);
+    left: 50%;
+    position: relative;
 }
 
 /* GIS-DEVS stuff */
