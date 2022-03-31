@@ -24,8 +24,10 @@
 		<link rel='shortcut icon' href='./assets/favicon.ico'>
 		<link rel="stylesheet" href="../app-references/ol/ol.css" type="text/css">
 		<link rel="stylesheet" href="../app-references/ol/ol-ext.min.css" type="text/css"/>
-		<link rel="stylesheet" href="../app-framework/framework.css">
-		<link rel="stylesheet" href="./application.css">
+		<link rel="stylesheet" href="../app-framework/css/base.css">
+		<link rel="stylesheet" href="../app-framework/css/ui.css">
+		<link rel="stylesheet" href="../app-framework/css/widgets.css">
+		<link rel="stylesheet" href="./application.css">		
 		
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
@@ -37,13 +39,13 @@
 			import Net from '../app-framework/tools/net.js';
 
 			var params = { 
-				path: Net.GetUrlParameter("path"),
-				uuid: Net.GetUrlParameter("uuid")
+				path: Net.get_url_parameter("path"),
+				uuid: Net.get_url_parameter("uuid")
 			}
 
 			var viewer = new WDSV(document.body, params);
 
-			viewer.On("Error", (ev) => alert(ev.error.toString()));
+			viewer.on("Error", (ev) => alert(ev.error.toString()));
 		</script>
 	</head>
 	<body style="display:none;"></body>

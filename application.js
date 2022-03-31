@@ -1,45 +1,44 @@
 
 'use strict';
 
+import Application from '../app-framework/base/application.js';
 import Core from '../app-framework/tools/core.js';
 import Dom from '../app-framework/tools/dom.js';
 import Configuration from '../app-framework/data_structures/configuration/configuration.js';
-import Templated from '../app-framework/components/templated.js';
 import Recorder from '../app-framework/components/recorder.js';
 import DiagramAuto from '../app-framework/widgets/diagram/auto.js'
 import GridAuto from '../app-framework/widgets/grid/auto.js'
 import GisAuto from '../app-framework/widgets/gis/auto.js'
 import Playback from '../app-framework/widgets/playback.js';
 
-export default Core.Templatable("Application", class Application extends Templated { 
+export default class AppEmbed extends Application { 
 
-	constructor(node, simulation, config, style, files) {		
-		super(node);
+	constructor(container, simulation, config, style, files) {		
+		super(container);
 		
-		Dom.AddCss(document.body, "Embed");
+		Dom.add_css(document.body, "Embed");
 		
 		this.files = files;
 		this.simulation = simulation;
 		this.settings = config;
 			
-		this.ShowView(this.Elem("view")).then(view => {
+		this.show_view(this.elems.view).then(view => {
 			this.view = view;
 			
 			if (!this.view) throw new Error("Unable to create a view widget from simulation object.");
 			
-			this.Widget("playback").recorder = new Recorder(this.view.widget.canvas);
-			this.Widget("playback").Initialize(this.simulation, this.settings.playback);
+			this.elems.playback.recorder = new Recorder(this.view.widget.canvas);
+			this.elems.playback.initialize(this.simulation, this.settings.playback);
 		
-			this.view.Resize();
-			this.view.Redraw();
+			this.view.resize();
+			this.view.redraw();
 		});
-		
 	}
 	
-	ShowView(container) {
-		var d = Core.Defer();
+	show_view(container) {
+		var d = Core.defer();
 		
-		Dom.AddCss(document.body, this.simulation.type);
+		Dom.add_css(document.body, this.simulation.type);
 		
 		if (this.settings.diagram) {
 			d.Resolve(new DiagramAuto(container, this.simulation, this.settings.diagram));
@@ -50,20 +49,16 @@ export default Core.Templatable("Application", class Application extends Templat
 		else if (this.settings.gis) {
 			var view = new GisAuto(container, this.simulation, this.settings.gis, this.files.geojson || []);
 			
-			view.On("ready", ev => d.Resolve(view));
+			view.on("ready", ev => d.Resolve(view));
 		}
 		
 		return d.promise;
-	}
-	
-	OnWidget_Error(ev) {
-		alert (ev.error);
-	}						   
+	}					   
 						   
-	Template() {
+	html() {
 		return	"<main handle='main' class='awd view-container'>" +
 					"<div handle='view' class='view'></div>" +
-					"<div handle='playback' widget='Widget.Playback'></div>" +
+					"<div handle='playback' widget='Api.Widget.Playback'></div>" +
 				"</main>";
 	}
-});
+}
