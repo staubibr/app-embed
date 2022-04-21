@@ -50,7 +50,7 @@ export default class Main extends Evented {
 				style : `${Core.URLs.models}/style.json`
 			}
 			
-			if (this.diagram) files.diagram = `${Core.URLs.models}/diagram.svg`;
+			files.diagram = `${Core.URLs.models}/diagram.svg`;
 			
 			this.LoadFiles(files);
 		}
@@ -66,7 +66,7 @@ export default class Main extends Evented {
 		
 		var defs = [p1,p2,p3,p4];
 		
-		if (files.diagram) defs.push(Net.File(files.diagram, "diagram.svg", true));
+		defs.push(Net.File(files.diagram, "diagram.svg", true));
 		
 		Promise.all(defs).then(this.OnFiles_Ready.bind(this), this.OnWDSV_Failure.bind(this));
 	}
