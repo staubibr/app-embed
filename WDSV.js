@@ -2,9 +2,9 @@
 
 import Core from "../app-framework/tools/core.js";
 import Net from "../app-framework/tools/net.js";
-import Evented from '../app-framework/components/evented.js';
+import Evented from '../app-framework/base/evented.js';
 import Loader from '../app-framework/widgets/loader.js';
-import ChunkReader from '../app-framework/components/chunkReader.js';
+import AppConfig from '../app-framework/components/config.js';
 import Application from "./application.js";
 
 export default class Main extends Evented { 
@@ -17,61 +17,64 @@ export default class Main extends Evented {
 
 	get diagram() { return this._json.diagram; }
 
-	get node() { return this._node; }
+	get container() { return this._container; }
 
-	constructor(node, json) {
+	constructor(container, json) {
 		super();
 		
-		this._node = node;
+		this._container = container;
 		this._json = json;
 
-		Core.WaitForDocument().then(this.OnBaseConfig_Loaded.bind(this), this.OnWDSV_Failure.bind(this));
+		var p1 = Core.wait_for_document();
+		var p2 = AppConfig.load("./application.json");
+
+		Promise.all([p1, p2]).then(this.on_base_config_loaded.bind(this), this.on_wdsv_failure.bind(this));
 	
-		this.Emit("Initializing");
+		this.emit("initializing");
 	}
 	
-	OnBaseConfig_Loaded(responses) {	
-		this.loader = new Loader(this.node);
+	on_base_config_loaded(responses) {	
+		this.loader = new Loader(this.container);
 		
-		this.loader.On("ready", this.OnLoader_Ready.bind(this));
-		this.loader.On("error", this.OnLoader_Failure.bind(this));
+		this.loader.on("ready", this.on_loader_ready.bind(this));
+		this.loader.on("error", this.on_loader_failure.bind(this));
 	
-		Core.URLs.models = null;
+		AppConfig.URLs.models = null;
 	
-		if (this.path) Core.URLs.models = [Core.URLs.logs, this.path].join("/");
+		if (this.path) AppConfig.URLs.models = [AppConfig.URLs.logs, this.path].join("/");
 		
-		if (this.uuid) Core.URLs.models = [Core.URLs.viz, this.uuid].join("/");
+		if (this.uuid) AppConfig.URLs.models = [AppConfig.URLs.viz, this.uuid].join("/");
 	
-		if (Core.URLs.models) {			
+		if (AppConfig.URLs.models) {			
 			var files = {
-				visualization : `${Core.URLs.models}/visualization.json`,
-				structure : `${Core.URLs.models}/structure.json`,
-				messages : `${Core.URLs.models}/messages.log`,
-				style : `${Core.URLs.models}/style.json`
+				visualization : `${AppConfig.URLs.models}/visualization.json`,
+				structure : `${AppConfig.URLs.models}/structure.json`,
+				messages : `${AppConfig.URLs.models}/messages.log`,
+				style : `${AppConfig.URLs.models}/style.json`
 			}
 			
-			files.diagram = `${Core.URLs.models}/diagram.svg`;
+			if (this.diagram) files.diagram = `${AppConfig.URLs.models}/diagram.svg`;
 			
-			this.LoadFiles(files);
+			this.load_files(files);
 		}
 		
 		else this.loader.container.style.display = "block";
 	}
 	
-	LoadFiles(files) {	
-		var p1 = Net.File(files.visualization, "visualization.json", true);
-		var p2 = Net.File(files.structure, "structure.json");
-		var p3 = Net.File(files.messages, "messages.log");
-		var p4 = Net.File(files.style, "style.json", true);
+	load_files(files) {	
+		var p1 = Net.file(files.visualization, "visualization.json", true);
+		var p2 = Net.file(files.structure, "structure.json");
+		var p3 = Net.file(files.messages, "messages.log");
+		var p4 = Net.file(files.style, "style.json", true);
 		
 		var defs = [p1,p2,p3,p4];
 		
-		defs.push(Net.File(files.diagram, "diagram.svg", true));
+		if (files.diagram) defs.push(Net.file(files.diagram, "diagram.svg", true));
 		
-		Promise.all(defs).then(this.OnFiles_Ready.bind(this), this.OnWDSV_Failure.bind(this));
+		Promise.all(defs).then(this.on_files_ready.bind(this), this.on_wdsv_failure.bind(this));
 	}
 	
-	OnFiles_Ready(files) {
+	on_files_ready(files) {
 		files = files.filter(f => !!f);
 		
 		this.files = { 
@@ -82,25 +85,25 @@ export default class Main extends Evented {
 			style: files.find(f => f.name == 'style.json')
 		}
 		
-		this.loader.Load(this.files);
+		this.loader.load(this.files);
 	}
 
-	OnLoader_Ready(ev) {
-		this.loader.roots.forEach(r => this.node.removeChild(r));
+	on_loader_ready(ev) {
+		this.loader.root.remove();
 		this.loader.container.style.display = "block"
 
-		var app = new Application(this.node, ev.simulation, ev.configuration, ev.style, ev.files);
+		var app = new Application(this.container, ev.simulation, ev.configuration, ev.style, ev.files);
 
-		this.Emit("Ready", { application:app });
+		this.emit("ready", { application:app });
 	}
 	
-	OnLoader_Failure(ev) {
-		this.OnWDSV_Failure(ev.error);
+	on_loader_failure(ev) {
+		this.on_wdsv_failure(ev.error);
 	}
 	
-	OnWDSV_Failure(error) {
+	on_wdsv_failure(error) {
 		console.error(error);
 		
-		this.Emit("Error", { error:error });
+		this.emit("error", { error:error });
 	}
 }
