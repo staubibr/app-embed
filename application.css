@@ -11,30 +11,43 @@ html {
 }
 
 html, 
-body.Embed, 
-body.Embed main, 
-body.Embed .view, 
-body.Embed .map-container, 
-body.Embed .map {
+body.embed, 
+body.embed main, 
+body.embed .view, 
+body.embed .map-container, 
+body.embed .map {
+	/*
 	width: 100%;
 	height: 100%;    
 	padding: 0;
     margin: 0;
+	*/
 	overflow-y:hidden;
 }
 
-body.Embed,
-body.Embed select, 
-body.Embed .popup {
+body.embed.gis, 
+body.embed.gis main, 
+body.embed.gis .view, 
+body.embed.gis .map-container, 
+body.embed.gis .map {
+	width: 100%;
+	height: 100%;    
+	padding: 0;
+    margin: 0;
+}
+
+body.embed,
+body.embed select, 
+body.embed .popup {
 	font-family: 'Varela Round', sans-serif;
     font-size: 11pt;
 }
 
-body.Embed button {
+body.embed button {
 	background-color: rgba(0,60,136,.5);
 }
 
-body.Embed button:hover {
+body.embed button:hover {
 	background-color: rgba(0,60,136,.7);
 }
 
@@ -44,7 +57,7 @@ body.Embed button:hover {
 
 .playback {
 	position: absolute;
-	bottom: 0px;
+	/*bottom: 0px;*/
     left: 50%;
     transform: translate(-50%,0);
     padding: 2px;
@@ -55,7 +68,7 @@ body.Embed button:hover {
     bottom: 10px;
 }
 
-body.Embed.GIS-DEVS .playback {
+body.embed.gis .playback {
     bottom: 8px;
 }
 
@@ -89,7 +102,7 @@ body.Embed.GIS-DEVS .playback {
 
 
 /* TODO: THIS IS A LOT OF CSS FOR ONE WIDGET, SOME NEEDS TO MOVE TO API-WEB-DEVS */
-.loader {
+.loader-widget {
     position: absolute;
     width: 60%;
     height: 60%;
@@ -98,37 +111,37 @@ body.Embed.GIS-DEVS .playback {
     transform: translate(-50%, -50%);
 }
 
-.loader .box-inner {
+.loader-widget .box-inner {
 	height: 400px;
 	text-align:center;
 }
 
-.loader .box-input-files .box-inner:hover {
+.loader-widget .box-input-files .box-inner:hover {
   background: #eff7ff;
   border-color: #0051a3;
   transition: all .2s ease;
 }
 
-.loader .box-input-files .files-container .file:hover {
+.loader-widget .box-input-files .files-container .file:hover {
   background: #eff7ff;
 }
 
-.loader .box-input-files .box-inner {
+.loader-widget .box-input-files .box-inner {
     background: #fff;
 	border-color: #198CFF;
 }
 
-.loader .box-input-files i, 
-.loader .box-input-files label {
+.loader-widget .box-input-files i, 
+.loader-widget .box-input-files label {
     font-weight: bold;
 }
 
-.loader .box-input-files i, 
-.loader .box-input-files label {
+.loader-widget .box-input-files i, 
+.loader-widget .box-input-files label {
     color: #0051A3;
 }
 
-.loader button {
+.loader-widget button {
 	height: 30px;
     background-color: #198CFF;
     color: #eee;
@@ -138,40 +151,40 @@ body.Embed.GIS-DEVS .playback {
     cursor: pointer;
 }
 
-.loader, .button-column {
+.loader-widget, .button-column {
 	vertical-align: top;
 	margin : 15px 5px;
 }
 
-.loader .clear,
-.loader .parse {
+.loader-widget .clear,
+.loader-widget .parse {
     display:inline-block;
 }
 
-.loader .clear {
+.loader-widget .clear {
     border-bottom: solid 2px #980000;
 	background:#fd6e6e;
     width: 29%;
 }
 
-.loader .clear:hover {
+.loader-widget .clear:hover {
 	background:#980000;
 }
 
-.loader .parse {
+.loader-widget .parse {
     width: 69%;
 	margin-top : 10px;
 	margin-left : 2%;
 }
 
-.loader button:disabled {
+.loader-widget button:disabled {
     cursor: not-allowed;
 	background-color: #cacaca;
     color: #7e7e7e;
     border-color: #7e7e7e;
 }
 
-.loader button:not(:disabled):hover {
+.loader-widget button:not(:disabled):hover {
   background: #0051A3;
   transition: all .2s ease;
 }

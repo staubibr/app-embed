@@ -4,59 +4,57 @@
 import Application from '../app-framework/base/application.js';
 import Core from '../app-framework/tools/core.js';
 import Dom from '../app-framework/tools/dom.js';
-import Configuration from '../app-framework/data_structures/configuration/configuration.js';
+import Configuration from '../app-framework/data_structures/visualization/configuration.js';
 import Recorder from '../app-framework/components/recorder.js';
-import DiagramAuto from '../app-framework/widgets/diagram/auto.js'
-import GridAuto from '../app-framework/widgets/grid/auto.js'
-import GisAuto from '../app-framework/widgets/gis/auto.js'
+import wDiagram from '../app-framework/widgets/diagram/w-diagram.js'
+import wGrid from '../app-framework/widgets/grid/w-grid.js'
+import wGIS from '../app-framework/widgets/gis/w-gis.js'
 import Playback from '../app-framework/widgets/playback.js';
 
 export default class AppEmbed extends Application { 
 
-	constructor(container, simulation, config, style, files) {		
+	constructor(container, simulation, config, files) {		
 		super(container);
 		
-		Dom.add_css(document.body, "Embed");
-		
-		this.files = files;
 		this.simulation = simulation;
-		this.settings = config;
-			
-		this.show_view(this.elems.view).then(view => {
-			this.view = view;
-			
-			if (!this.view) throw new Error("Unable to create a view widget from simulation object.");
-			
-			this.elems.playback.recorder = new Recorder(this.view.widget.canvas);
-			this.elems.playback.initialize(this.simulation, this.settings.playback);
+		this.config = config;
+		this.files = files;
 		
-			this.view.resize();
-			this.view.redraw();
-		});
+		this.initialize();
+	}
+	
+	async initialize() {
+		this.view = await this.show_view(this.elems.view);
+		
+		this.elems.playback.recorder = new Recorder(this.view.canvas);
+		this.elems.playback.initialize(this.simulation, this.config);
 	}
 	
 	show_view(container) {
 		var d = Core.defer();
 		
-		Dom.add_css(document.body, this.simulation.type);
+		Dom.add_css(document.body, this.config.type);
 		
-		if (this.settings.diagram) {
-			d.Resolve(new DiagramAuto(container, this.simulation, this.settings.diagram));
+		if (this.config.type == "diagram") {			
+			return d.Resolved(new wDiagram(container, this.simulation, this.config));
 		}
-		else if (this.settings.grid) {
-			d.Resolve(new GridAuto(container, this.simulation, this.settings.grid));
+		else if (this.config.type === "grid") {
+			return d.Resolved(new wGrid(container, this.simulation, this.config));
 		}
-		else if (this.settings.gis) {
-			var view = new GisAuto(container, this.simulation, this.settings.gis, this.files.geojson || []);
+		else if (this.config.type === "gis") {
+			var view = new wGIS(container, this.simulation, this.config, this.files || []);
 			
 			view.on("ready", ev => d.Resolve(view));
+			
+			return d.promise;
 		}
-		
-		return d.promise;
+		else {
+			this.handle_error(new Error("The embedded DEVS viewer does not support visualization type " + view));
+		}		
 	}					   
-						   
+	
 	html() {
-		return	"<main handle='main' class='awd view-container'>" +
+		return	"<main handle='main' class='view-container'>" +
 					"<div handle='view' class='view'></div>" +
 					"<div handle='playback' widget='Api.Widget.Playback'></div>" +
 				"</main>";
