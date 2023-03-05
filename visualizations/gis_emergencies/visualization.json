@@ -164,21 +164,21 @@
     ],
     "files": [{
 		"name": "log.csv",
-		"url": "http://localhost/app-embed/sample/gis with files/log.csv"
+		"url": "https://staubibr.github.io/app-embed/visualizations/gis_emergencies/log.csv"
 	},{
 		"name": "metadata.json",
-		"url": "http://localhost/app-embed/sample/gis with files/metadata.json"
+		"url": "https://staubibr.github.io/app-embed/visualizations/gis_emergencies/metadata.json"
 	},{
 		"name": "scenario.json",
-		"url": "http://localhost/app-embed/sample/gis with files/scenario.json"
+		"url": "https://staubibr.github.io/app-embed/visualizations/gis_emergencies/scenario.json"
 	},{
 		"name": "simulation_area.geojson",
-		"url": "http://localhost/app-embed/sample/gis with files/simulation_area.geojson"
+		"url": "https://staubibr.github.io/app-embed/visualizations/gis_emergencies/simulation_area.geojson"
 	},{
 		"name": "hospitals.geojson",
-		"url": "http://localhost/app-embed/sample/gis with files/hospitals.geojson"
+		"url": "https://staubibr.github.io/app-embed/visualizations/gis_emergencies/hospitals.geojson"
 	},{
 		"name": "emergency_areas.geojson",
-		"url": "http://localhost/app-embed/sample/gis with files/emergency_areas.geojson"
+		"url": "https://staubibr.github.io/app-embed/visualizations/gis_emergencies/emergency_areas.geojson"
 	}]
 }
