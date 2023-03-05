@@ -1,0 +1,99 @@
+{
+    "identifier": "89b31233-5f69-4bed-9aa4-3d0051fdfab8",
+    "title": "Geographical SEAIRD - Human Behaviour",
+    "alternative": null,
+    "creator": ["Aidan Fahlman"],
+    "contributor": null,
+    "language": ["en-CA"],
+    "description": "This coupled model simulates geographical disease spread with human behaviour elements",
+    "subject": ["SIR", "Human Behaviour", "health", "gis", "simple"],
+    "spatial coverage": [{ 
+		"placename": "Canada" 
+	}],
+    "temporal coverage": [{
+            "start": "2020-01-01",
+            "end": "2022-01-01",
+            "scheme": "ISO 8601"
+        }
+    ],
+    "license": ["MIT License"],
+    "created": "2020-05-11",
+    "modified": ["2021-01-04", "2021-01-18", "2021-02-12"],
+    "time": "NDTime",
+    "behavior": "Every 24 hours new humans are infected/recover/die",
+    "state": {
+        "description": "The model's state holds the total number of persons alive, susceptible to infection, exposed, infected, recovered, etc.",
+        "message type": 1
+    },
+    "message type": [{
+            "identifier": 1,
+            "field": [{
+                    "name": "Alive population",
+                    "description": "Number of people alive within the population.",
+                    "type": "numerical",
+                    "uom": "persons"
+                }, {
+                    "name": "Total susceptible",
+                    "description": "Total number of susceptible people",
+                    "type": "numerical",
+                    "uom": "persons"
+                }, {
+                    "name": "Total exposed",
+                    "description": "Total number of exposed people",
+                    "type": "numerical",
+                    "uom": "persons"
+                }, {
+                    "name": "Total infected",
+                    "description": "Total number of infected people",
+                    "type": "numerical",
+                    "uom": "persons"
+                }, {
+                    "name": "Total recovered",
+                    "description": "Total number of recovered people",
+                    "type": "numerical",
+                    "uom": "persons"
+                }, {
+                    "name": "New exposed",
+                    "description": "Newly exposed people",
+                    "type": "numerical",
+                    "uom": "persons"
+                }, {
+                    "name": "New infected",
+                    "description": "Newly infected people",
+                    "type": "numerical",
+                    "uom": "persons"
+                }, {
+                    "name": "New recoveries",
+                    "description": "Newly recovered people",
+                    "type": "numerical",
+                    "uom": "persons"
+                }, {
+                    "name": "Total fatalities",
+                    "description": "Total number of dead people",
+                    "type": "numerical",
+                    "uom": "persons"
+                }, {
+                    "name": "New asymptomatic infections",
+                    "description": "Newly asymptomatic people",
+                    "type": "numerical",
+                    "uom": "persons"
+                }, {
+                    "name": "Total asymptomatic infections",
+                    "description": "Total number of asymptomatic people",
+                    "type": "numerical",
+                    "uom": "persons"
+                }, {
+                    "name": "Days in lockdown",
+                    "description": "Number of days in lockdown",
+                    "type": "numerical",
+                    "uom": "days"
+                }, {
+                    "name": "Number of lockdowns",
+                    "description": "Total number of lockdowns",
+                    "type": "numerical",
+                    "uom": "lockdowns"
+                }
+            ]
+        }
+    ]
+}
