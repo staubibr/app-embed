@@ -228,7 +228,7 @@ body.embed.gis .playback {
 }
 
 .ol-popup-content {
-    width: 200px;
+	max-width: 500px;
 }
 
 .ol-popup .ol-popup-content ul {
