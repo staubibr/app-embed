@@ -212,5 +212,18 @@
                 "color": "rgba(0,0,0,1)"
             }
         }
-    ]
+    ],
+    "files": [{
+		"name": "ca_provinces_icu2_scenario.json",
+		"url": "https://staubibr.github.io/app-embed/visualizations/aidan/ca_provinces_icu2_scenario.json"
+	},{
+		"name": "metadata.json",
+		"url": "https://staubibr.github.io/app-embed/visualizations/aidan/metadata.json"
+	},{
+		"name": "pandemic_state.txt",
+		"url": "https://staubibr.github.io/app-embed/visualizations/aidan/pandemic_state.txt"
+	},{
+		"name": "pr_2016.geojson",
+		"url": "https://staubibr.github.io/app-embed/visualizations/aidan/pr_2016.geojson"
+	}]
 }
