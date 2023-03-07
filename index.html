@@ -33,12 +33,12 @@
 		<script src="../app-references/ol/ol.js" type="text/javascript" ></script>
 		<script src="../app-references/ol/ol-ext.min.js" type="text/javascript"></script>
 		<script type='module'>
-			import WDSV from './WDSV.js';
+			import Application from './application.js';
 
-			var viewer = new WDSV(document.body);
-
-			viewer.on("Error", (ev) => alert(ev.error.toString()));
+			var viewer = new Application(document.body);
+			
+			viewer.load();
 		</script>
 	</head>
-	<body style="display:none;" class="embed"></body>
+	<body class="embed"></body>
 </html>
