@@ -26,6 +26,13 @@ export default class AppEmbed extends Application {
 			this.elems.loader.load([file]);
 		}
 		
+		else if (qry.get("ogse")) {
+			var url = "http://localhost/ogse-files/workspaces/" + qry.get("ogse") + "/visualization.json";
+			var file = await Net.file(url, "visualization.json");
+			
+			this.elems.loader.load([file], qry.get("ogse"));
+		}
+		
 		else Dom.remove_css(this.elems.loader.root, "hidden");
 	}
 	
