@@ -91,21 +91,21 @@
     ],
     "files": [{
 		"name": "log.csv",
-		"url": "log.csv"
+		"url": "https://staubibr.github.io/app-embed/visualizations/bem/log.csv"
 	},{
 		"name": "metadata.json",
-		"url": "metadata.json"
+		"url": "https://staubibr.github.io/app-embed/visualizations/bem/metadata.json"
 	},{
 		"name": "scenario.json",
-		"url": "scenario.json"
+		"url": "https://staubibr.github.io/app-embed/visualizations/bem/scenario.json"
 	},{
 		"name": "simulation_area.geojson",
-		"url": "data/simulation_area.geojson"
-	},{
-		"name": "commercial.geojson",
-		"url": "data/commercial.geojson"
+		"url": "https://staubibr.github.io/app-embed/visualizations/bem/data/simulation_area.geojson"
 	},{
 		"name": "residential.geojson",
-		"url": "data/residential.geojson"
+		"url": "https://staubibr.github.io/app-embed/visualizations/bem/data/residential.geojson"
+	},{
+		"name": "commercial.geojson",
+		"url": "https://staubibr.github.io/app-embed/visualizations/bem/data/commercial.geojson"
 	}]
 }
