@@ -1,0 +1,111 @@
+{
+	"type": "gis",
+    "speed": 5,
+    "loop": true,
+    "cache": 10,
+	"basemap": "openstreetmap",
+    "view": {
+        "center": [-75.735890, 45.405890],
+        "zoom": 16
+    },
+    "layers": [{
+            "id": "simulation_area",
+            "type": "polygon",
+            "file": "simulation_area.geojson",
+            "fields": ["dauid"],
+            "label": "Simulation Area (DA)",
+            "style": "simulation_area",
+            "join": null
+        }, {
+            "id": "residential",
+            "type": "polygon",
+            "file": "residential.geojson",
+            "fields": ["id", "area", "bt"],
+            "label": "Residential Buildings",
+            "style": "simulation_area",
+            "join": "id"
+        }, {
+            "id": "commercial",
+            "type": "polygon",
+            "file": "commercial.geojson",
+            "fields": ["id", "area", "bt", "nof", "yoc"],
+            "label": "Commercial Buildings",
+            "style": "simulation_area",
+            "join": "id"
+        }
+    ],
+    "styles": [{
+            "id": "simulation_area",
+            "fill": {
+                "type": "static",
+                "color": "rgba(0,0,0,0)"
+            },
+            "stroke": {
+                "type": "static",
+                "width": 2,
+                "color": "rgba(200,0,0,1)"
+            }
+        }, {
+            "id": "highlight",
+            "radius": 6,
+            "fill": {
+                "type": "static",
+                "color": "rgba(0,200,200,0.6)"
+            },
+            "stroke": {
+                "type": "static",
+                "width": 1,
+                "color": "rgba(255,255,255,1)"
+            }
+        }
+    ],
+    "variables": [{
+            "name": "Residential energy",
+            "layer": "residential",
+            "fill": {
+                "type": "quantile",
+                "property": "energy",
+                "zero": "rgba(255,255,255,0.8)",
+                "colors": ["rgba(254,229,217,0.8)", "rgba(252,187,161,0.8)", "rgba(252,146,114,0.8)", "rgba(251,106,74,0.8)", "rgba(222,45,38,0.8)", "rgba(165,15,21,0.8)"]
+            },
+            "stroke": {
+                "type": "static",
+                "width": 1,
+                "color": "rgba(0,0,0,1)"
+            }
+        },{
+            "name": "Commercial energy",
+            "layer": "commercial",
+            "fill": {
+                "type": "quantile",
+                "property": "energy",
+                "zero": "rgba(255,255,255,0.8)",
+                "colors": ["rgba(254,229,217,0.8)", "rgba(252,187,161,0.8)", "rgba(252,146,114,0.8)", "rgba(251,106,74,0.8)", "rgba(222,45,38,0.8)", "rgba(165,15,21,0.8)"]
+            },
+            "stroke": {
+                "type": "static",
+                "width": 1,
+                "color": "rgba(0,0,0,1)"
+            }
+        }
+    ],
+    "files": [{
+		"name": "log.csv",
+		"url": "log.csv"
+	},{
+		"name": "metadata.json",
+		"url": "metadata.json"
+	},{
+		"name": "scenario.json",
+		"url": "scenario.json"
+	},{
+		"name": "simulation_area.geojson",
+		"url": "data/simulation_area.geojson"
+	},{
+		"name": "commercial.geojson",
+		"url": "data/commercial.geojson"
+	},{
+		"name": "residential.geojson",
+		"url": "data/residential.geojson"
+	}]
+}
