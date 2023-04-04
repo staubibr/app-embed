@@ -1,0 +1,103 @@
+{
+	"type": "gis",
+    "speed": 15,
+    "loop": true,
+    "cache": 10,
+	"basemap": "openstreetmap",
+    "view": {
+        "center": [-114, 51.0],
+        "zoom": 10
+    },
+    "layers": [{
+            "id": "GridCells",
+            "type": "polygon",
+            "file": "grid_cells.geojson",
+            "fields": ["id", "idnum", "boundary_id", "gdp_hist"],
+            "label": "Grid Cells",
+            "style": "grid_cells",
+            "join": "id"
+        }
+    ],
+    "styles": [{
+            "id": "grid_cells",
+            "fill": {
+                "type": "static",
+                "color": "rgba(255,255,255,0)"
+            },
+            "stroke": {
+                "type": "static",
+                "width": 2,
+                "color": "rgb(200,30,75)"
+            }
+	    }, {
+            "id": "highlight",
+            "radius": 6,
+            "fill": {
+                "type": "static",
+                "color": "rgba(0,200,200,0.6)"
+            },
+            "stroke": {
+                "type": "static",
+                "width": 1,
+                "color": "rgba(255,255,255,1)"
+            }
+        }
+    ],
+    "variables": [{
+            "name": "GDP (GST)",
+            "layer": "GridCells",
+            "fill": {
+                "type": "quantile",
+                "property": "GDP (GST)",
+                "colors": ["rgb(255,255,204)","rgb(199,233,180)","rgb(127,205,187)","rgb(65,182,196)","rgb(44,127,184)","rgb(37,52,148)"]
+            },
+            "stroke": {
+                "type": "static",
+                "width": 1,
+                "color": "rgba(0,0,0,1)"
+            }
+		},{
+            "name": "Month over month change",
+            "layer": "GridCells",
+            "fill": {
+                "type": "quantile",
+                "property": "month over month change",
+                "colors": ["rgba(254,229,217,0.8)", "rgba(252,187,161,0.8)", "rgba(252,146,114,0.8)", "rgba(251,106,74,0.8)", "rgba(222,45,38,0.8)"]
+            },
+            "stroke": {
+                "type": "static",
+                "width": 1,
+                "color": "rgba(0,0,0,1)"
+            }
+		},{
+            "name": "Month over month growth rate",
+            "layer": "GridCells",
+            "fill": {
+                "type": "quantile",
+                "property": "month over month growth rate",
+                "colors": ["rgb(237,248,233)","rgb(186,228,179)","rgb(116,196,118)","rgb(35,139,69)"]
+            },
+            "stroke": {
+                "type": "static",
+                "width": 1,
+                "color": "rgba(0,0,0,1)"
+            }
+		}
+    ],
+    "files": [{
+		"name": "log.csv",
+		"url": "https://staubibr.github.io/app-embed/visualizations/oil_gdp/log.csv"
+	},{
+		"name": "metadata.json",
+		"url": "https://staubibr.github.io/app-embed/visualizations/oil_gdp/metadata.json"
+	},{
+		"name": "scenario.json",
+		"url": "https://staubibr.github.io/app-embed/visualizations/oil_gdp/scenario.json"
+	},{
+		"name": "oil_prices.geojson",
+		"url": "https://staubibr.github.io/app-embed/visualizations/oil_gdp/data/oil_prices.geojson"
+	},{
+		"name": "grid_cells.geojson",
+		"url": "https://staubibr.github.io/app-embed/visualizations/oil_gdp/data/grid_cells.geojson"
+	}]
+}
